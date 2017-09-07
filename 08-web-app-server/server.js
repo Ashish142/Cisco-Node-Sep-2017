@@ -21,14 +21,28 @@ var server = http.createServer(function(req, res){
 			return;
 		}
 		fs.createReadStream(resource).pipe(res);
-	} else if (urlData.pathname === '/calculator') {
-		var queryData = querystring.parse(urlData.query);
-		var op = queryData.op,
-			n1 = parseInt(queryData.n1, 10),
-			n2 = parseInt(queryData.n2, 10),
+	} else if (urlData.pathname === '/calculator' && req.method === 'GET') {
+		var calculatorData = querystring.parse(urlData.query);
+		var op = calculatorData.op,
+			n1 = parseInt(calculatorData.n1, 10),
+			n2 = parseInt(calculatorData.n2, 10),
 			result = calculator[op](n1, n2);
 		res.write(result.toString());
 		res.end();
+	} else if (urlData.pathname === '/calculator' && req.method === 'POST') {
+		var rawData = '';
+		req.on('data', function(chunk){
+			rawData += chunk;
+		});
+		req.on('end', function(){
+			var calculatorData = querystring.parse(rawData);
+			var op = calculatorData.op,
+				n1 = parseInt(calculatorData.n1, 10),
+				n2 = parseInt(calculatorData.n2, 10),
+				result = calculator[op](n1, n2);
+			res.write(result.toString());
+			res.end();
+		});
 	} else {
 		res.statusCode = 404;
 		res.end();
@@ -36,4 +50,3 @@ var server = http.createServer(function(req, res){
 	}
 });
 server.listen(8080);
-

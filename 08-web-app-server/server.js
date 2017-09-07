@@ -1,3 +1,7 @@
+//Data Parsing (dataParser.js)
+//Static Resources (serveStatic.js)
+//Calculator Requests (calculatorReqHandler.js)
+//Not Found (notFoundHandler.js)
 
 var http = require('http'),
 	path = require('path'),

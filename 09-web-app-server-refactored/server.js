@@ -1,6 +1,7 @@
 
 var http = require('http'),
 	path = require('path'),
+	logger = require('./logger'),
 	dataParser = require('./dataParser'),
 	serveStatic = require('./serveStatic'),
 	calculatorHandler = require('./calculatorHandler'),
@@ -8,8 +9,9 @@ var http = require('http'),
 	app = require('./app');
 
 app.use(dataParser);
+app.use(logger);
 app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(calculatorHandler);
-app.use(notFoundHandler);
+app.use(notFoundHandler); 
 
 http.createServer(app).listen(8080);

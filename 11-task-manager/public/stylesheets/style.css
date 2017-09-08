@@ -6,3 +6,31 @@ body {
 a {
   color: #00B7FF;
 }
+
+#taskList{
+	list-style: none;
+	-webkit-padding-start : 0px;
+	width: 500px;
+}
+#taskList li{
+	border : 1px solid gray;
+	background-color: #e7e7e7;
+	padding: 5px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.taskName, .stats{
+	font-size: 22pt;
+}
+
+.taskName{
+	cursor: pointer;
+}
+
+.closed{
+	color : red;
+	text-decoration: line-through;
+	font-style: italic;
+	font-weight: bold;
+}

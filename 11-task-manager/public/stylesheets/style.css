@@ -28,7 +28,7 @@ a {
 	cursor: pointer;
 }
 
-.closed{
+.completed{
 	color : red;
 	text-decoration: line-through;
 	font-style: italic;

@@ -3,12 +3,23 @@
 <h3>Tasks</h3>
 <a href="/tasks/new">Create New...</a>
 <div class="stats">
-	<span class="closed">2</span>
+	<span class="completed">{{completedCount}}</span>
 	<span> / </span>
-	<span>5</span>
+	<span>{{list.length}}</span>
 </div>
 <ol id="taskList">
-	<li><span class="taskName closed" >This is task - 1</span><a href="">X</a></li>
-	<li><span class="taskName">This is task - 2</span><a href="">X</a></li>
+	{{#each list}}
+		<li>
+			{{#if this.isCompleted}}
+				<span class="taskName completed">{{this.name}}</span>
+			{{else}}
+				<span class="taskName">{{this.name}}</span>
+			{{/if}}
+			<a href="/tasks/toggle/{{this.id}}">X</a>
+		</li>
+	{{/each}}
+	
 </ol>
-<form action="/tasks/remove" method="post"><input type="submit" value="Remove Closed"></form>
+<form action="/tasks/remove" method="post">
+	<input type="submit" value="Remove Completed">
+</form>
